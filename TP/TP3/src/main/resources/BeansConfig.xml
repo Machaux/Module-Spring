@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="reportService" class="com.bankonet.metier.ReportService" scope="prototype">
+		<property name="reportGenerator" ref="htmlReportGenerator"/>
+		<property name="auteur" value="Fred"></property>
+		<!-- <constructor-arg index="0">
+			<ref bean="htmlReportGenerator"/>
+		</constructor-arg> -->
+	</bean>
+	
+	<bean id="pdfReportGenerator" class="com.bankonet.report.ReportFactory" factory-method="createReport">
+		<constructor-arg value = "pdf"/>
+	</bean>
+	
+	<bean id="htmlReportGenerator" class="com.bankonet.report.ReportFactory" factory-method="createReport">
+		<constructor-arg value = "html"/>
+	</bean>
+	
+</beans>
