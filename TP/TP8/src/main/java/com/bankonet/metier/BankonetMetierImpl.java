@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bankonet.dao.ICLientDAO;
 import com.bankonet.model.Client;
@@ -18,45 +20,48 @@ public class BankonetMetierImpl implements IBankonetMetier {
 	private ICLientDAO clientDao;
 	
 	@Override
-	public void addClient(Client c) {
-		// TODO Auto-generated method stub
-
+	@Transactional(propagation=Propagation.REQUIRES_NEW,rollbackFor=Exception.class)
+	public void addClient(Client c) throws Exception {
+		clientDao.addClient(c);
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public List<Client> listClients() {
-			
-		
 		return clientDao.listClients()	;
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void deleteClient(int idClient) {
-		// TODO Auto-generated method stub
-
+		clientDao.deleteClient(idClient);
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Client editClient(int idClient) {
-		// TODO Auto-generated method stub
-		return null;
+		return clientDao.editClient(idClient);
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void updateClient(Client c) {
-		// TODO Auto-generated method stub
-
+		clientDao.updateClient(c);
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED,readOnly=true, timeout=5)
 	public List<Client> chercherClients(String motCle) {
 		return clientDao.chercherClients(motCle);
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public List<Client> supprimerCLientDontLeNomContient(String mot_cle){
 		for (Client client : clientDao.chercherClients(mot_cle)) {
-			clientDao.deleteClient(client.getId());
+			System.out.println(client.getId());
+			
+			this.deleteClient(client.getId());
 		}
 		return clientDao.listClients();
 		

@@ -3,15 +3,23 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation=
 	   "http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context 
-		http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 	
 	<context:annotation-config/>
 	<context:component-scan base-package="com.bankonet"/>
 	<context:property-placeholder location="classpath:/properties/jdbc.properties"/>
+	<aop:aspectj-autoproxy/>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 
 
 	<!-- beans pour les rapports -->
@@ -33,7 +41,6 @@
 	<!-- beans business Object -->
 	
 	<bean id="client" class="com.bankonet.model.Client" scope = "prototype" >
-		<property name="id" value="1"></property>
 		<property name="nom" value="tata"></property>
 		<property name="prenom" value="jean-pierre"></property>
 	</bean>
@@ -61,6 +68,13 @@
 		<property name="password" value ="${jdbc.password}"></property>
 		<property name="username" value="${jdbc.username}"></property>	
 	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory">
+			<ref bean="entityManagerFactory" />
+		</property>
+	</bean>
+	
 	
 	<bean id="entityManagerFactory"	class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="MY_PU "></property>
