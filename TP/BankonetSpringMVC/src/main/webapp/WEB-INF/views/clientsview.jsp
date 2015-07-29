@@ -7,7 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>clientsview</title>
+<!-- <link rel="stylesheet" href="resources/Style.css"> utilisation d'une CSS perso -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
+
 <body>
 
 	<h1><spring:message code="Welcome"></spring:message></h1>
@@ -76,7 +81,7 @@
 			<td><spring:message code="Name"></spring:message></td>
 			<td><spring:message code="FirstName"></spring:message></td>
 			<td><spring:message code="Login"></spring:message></td>
-			<td><spring:message code="Login"></spring:message></td>
+			<td><spring:message code="Password"></spring:message></td>
 		</tr>
 
 		
