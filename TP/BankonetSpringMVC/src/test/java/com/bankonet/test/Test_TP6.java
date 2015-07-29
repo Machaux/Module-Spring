@@ -3,7 +3,7 @@ package com.bankonet.test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.bankonet.metier.IBankonetMetier;
+import com.bankonet.metier.IBankonetMetierClient;
 
 public class Test_TP6 {
 
@@ -11,7 +11,7 @@ public class Test_TP6 {
 
 		ApplicationContext bankonetContext = new  ClassPathXmlApplicationContext("BeansConfig.xml");
 		
-		IBankonetMetier bankonetMetier = (IBankonetMetier) bankonetContext.getBean("bankonetMetier");
+		IBankonetMetierClient bankonetMetierClient = (IBankonetMetierClient) bankonetContext.getBean("bankonetMetier");
 
 		
 //		Client client = (Client) bankonetContext.getBean("client");
@@ -23,7 +23,7 @@ public class Test_TP6 {
 //			e.printStackTrace();
 //		}
 	
-		System.out.println("liste des clients : "+bankonetMetier.listClients());
+		System.out.println("liste des clients : "+bankonetMetierClient.listClients());
 			
 //		System.out.println("chercher les clients TATA : "+ bankonetMetier.chercherClients("TATA"));
 	

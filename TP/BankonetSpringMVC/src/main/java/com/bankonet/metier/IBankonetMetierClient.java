@@ -1,10 +1,11 @@
-package com.bankonet.dao;
+package com.bankonet.metier;
 
 import java.util.List;
 
 import com.bankonet.model.Client;
+import com.bankonet.model.Compte.types;
 
-public interface ICLientDAO {
+public interface IBankonetMetierClient {
 
 	public void addClient(Client c)throws Exception;
 	
@@ -18,4 +19,12 @@ public interface ICLientDAO {
 
 	public List<Client> chercherClients(String	motCle);
 	
+	public List<Client> supprimerCLientDontLeNomContient(String mot_cle);
+	
+	public void ajouterNouvCompteClient(Client c, types type);
+	
+	public void supprimerCompteClient(Client c, int compteID);
+	
+	
+
 }

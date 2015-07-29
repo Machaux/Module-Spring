@@ -9,7 +9,6 @@
 <title>clientsview</title>
 <!-- <link rel="stylesheet" href="resources/Style.css"> utilisation d'une CSS perso -->
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 

@@ -20,8 +20,6 @@ public class ClientDaoImpl implements ICLientDAO {
 	@Override
 	public void addClient(Client c) throws Exception{
 		em.persist(c);
-		//throw new RunTimeException("Erreur unchecked");
-		//throw new Exception("Erreur checked");
 	}
 
 	@Override

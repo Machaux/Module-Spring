@@ -1,8 +1,12 @@
 package com.bankonet.model;
 
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,6 +31,10 @@ public class Client extends Personne{
 	@Autowired
 	@Embedded
 	private Adresse adresse;
+	
+	@OneToMany
+	@JoinColumn(name="Comptes")
+	private List<Compte> listeComptes;
 	
 	/**
 	 * Constructeurs
@@ -58,8 +66,15 @@ public class Client extends Personne{
 		return ("id : "+Integer.toString(this.getId())+" - "+"nom : "+this.getNom()+" - "+"prenom : "+this.getPrenom());
 	}
 
-	
+	public void addCompte(Compte c) {
+		this.getListeComptes().add(c);
+	}
 
+	public boolean suppCompte(Compte c) {
+		return this.getListeComptes().remove(c);
+	}
+
+	
 	/**
 	 * Getters & setters 
 	 */
@@ -87,6 +102,14 @@ public class Client extends Personne{
 
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
+	}
+
+	public List<Compte> getListeComptes() {
+		return listeComptes;
+	}
+
+	public void setListeComptes(List<Compte> listeComptes) {
+		this.listeComptes = listeComptes;
 	}
 	
 	

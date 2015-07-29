@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.bankonet.metier.IBankonetMetier;
+import com.bankonet.metier.IBankonetMetierClient;
 import com.bankonet.model.Client;
 
 
@@ -21,7 +21,7 @@ import com.bankonet.model.Client;
 public class BankonetRESTController {
 	
 	@Autowired
-	private IBankonetMetier bankonetMetier;
+	private IBankonetMetierClient bankonetMetierClient;
 	
 	@RequestMapping(value = "listclients/{motCle}", method= RequestMethod.GET)
 	@ResponseBody
@@ -29,7 +29,7 @@ public class BankonetRESTController {
 		
 		System.out.println(motCle);
 		
-		return bankonetMetier.chercherClients(motCle);
+		return bankonetMetierClient.chercherClients(motCle);
 	}
 	
 	@RequestMapping(value = "creerclients/", method= RequestMethod.POST)
@@ -37,7 +37,7 @@ public class BankonetRESTController {
 	@ResponseBody
 	public void creerClient(@RequestBody Client client) {
 		try {
-			bankonetMetier.addClient(client);
+			bankonetMetierClient.addClient(client);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,7 +48,7 @@ public class BankonetRESTController {
 	@ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
 	@ResponseBody
 	public void supprClient(@PathVariable Integer id) {
-		bankonetMetier.deleteClient(id);
+		bankonetMetierClient.deleteClient(id);
 	}
 
 }

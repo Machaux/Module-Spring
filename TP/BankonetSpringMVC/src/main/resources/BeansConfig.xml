@@ -55,7 +55,15 @@
 		
 	<!-- beans persistance -->
 	
-	<bean id="clientDAO" class="com.bankonet.dao.ClientDaoImpl" scope="prototype">
+	<bean id="clientDAO" class="com.bankonet.dao.ClientDaoImpl" scope="singleton">
+		<property name="em">
+	        <bean class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+	            <property name = "entityManagerFactory" ref="entityManagerFactory"/>  
+	        </bean>
+		</property>
+	</bean>
+	
+	<bean id="compteDAO" class="com.bankonet.dao.CompteDAOImpl" scope="singleton">
 		<property name="em">
 	        <bean class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
 	            <property name = "entityManagerFactory" ref="entityManagerFactory"/>  
