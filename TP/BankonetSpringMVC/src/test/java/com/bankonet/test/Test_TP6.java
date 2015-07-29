@@ -15,16 +15,16 @@ public class Test_TP6 {
 		IBankonetMetier bankonetMetier = (IBankonetMetier) bankonetContext.getBean("bankonetMetier");
 
 		
-		Client client = (Client) bankonetContext.getBean("client");
-		
-		try {
-			bankonetMetier.addClient(client);
-		} catch (Exception e) {
-		
-			e.printStackTrace();
-		}
+//		Client client = (Client) bankonetContext.getBean("client");
+//		
+//		try {
+//			bankonetMetier.addClient(client);
+//		} catch (Exception e) {
+//			
+//			e.printStackTrace();
+//		}
 	
-//		System.out.println("liste des clients : "+bankonetMetier.listClients());
+		System.out.println("liste des clients : "+bankonetMetier.listClients());
 			
 //		System.out.println("chercher les clients TATA : "+ bankonetMetier.chercherClients("TATA"));
 	
