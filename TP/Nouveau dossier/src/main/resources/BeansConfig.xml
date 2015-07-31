@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation=
+	   "http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+	
+	<context:annotation-config/>
+	<aop:aspectj-autoproxy/>
+	
+	<!-- beans pour les rapports -->
+	
+	<bean id="reportService" class="com.bankonet.metier.ReportService" scope="prototype">
+		<property name="reportGenerator" ref="htmlReportGenerator"/>
+		<property name="auteur" value="Fred"></property>
+	</bean>
+	
+	<bean id="pdfReportGenerator" class="com.bankonet.report.ReportFactory" factory-method="createReport">
+		<constructor-arg value = "pdf"/>
+	</bean>
+	
+	<bean id="htmlReportGenerator" class="com.bankonet.report.ReportFactory" factory-method="createReport">
+		<constructor-arg value = "html"/>
+	</bean>
+	
+	
+	<!-- beans business Object -->
+	
+	<bean id="cli" class="com.bankonet.model.Client" scope = "prototype" >
+		<property name="nom" value="tata"></property>
+		<property name="prenom" value="jean-pierre"></property>
+	</bean>
+	
+	<bean id="adresse" class="com.bankonet.model.Adresse" scope = "prototype"> 
+		<property name="numero" value="13"></property>
+		<property name="rue" value="JP Girard"></property>
+		<property name="ville" value="Avrillé"></property>
+	</bean>
+	
+</beans>

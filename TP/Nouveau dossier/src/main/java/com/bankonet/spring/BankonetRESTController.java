@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.accept.HeaderContentNegotiationStrategy;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.bankonet.metier.IBankonetMetierClient;
 import com.bankonet.model.Client;
 
 
+@CrossOrigin
 @Controller
 @RequestMapping(value = "/rest")
 public class BankonetRESTController {
@@ -23,9 +25,14 @@ public class BankonetRESTController {
 	@Autowired
 	private IBankonetMetierClient bankonetMetierClient;
 	
-	@RequestMapping(value = "listclients/", method= RequestMethod.GET)
+	@RequestMapping (value = "listclients/", method= RequestMethod.GET)
 	@ResponseBody
+	@
 	public List<Client> listerClient() {
+		
+		ResponseBody rb = new ResponseBody();
+		
+		
 		return bankonetMetierClient.listClients();
 	}
 	

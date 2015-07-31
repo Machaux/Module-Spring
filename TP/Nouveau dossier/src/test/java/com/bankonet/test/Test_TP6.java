@@ -24,8 +24,6 @@ public class Test_TP6 {
 //		}
 	
 		System.out.println("liste des clients : "+bankonetMetierClient.listClients());
-		
-		System.out.println("liste des comptes : "+ bankonetMetierClient.editClient(2).getListeComptes());
 			
 //		System.out.println("chercher les clients TATA : "+ bankonetMetier.chercherClients("TATA"));
 	

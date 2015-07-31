@@ -1,0 +1,37 @@
+<div ng-controller="EmployeController as employeCtrl">
+
+
+	<div>
+		<H2>voici la page Employes</H2>
+	</div>
+
+	<ul>
+			<table border=>
+				<tr >
+					<td>ID</td>
+					<td>Nom</td>
+					<td>login</td>
+					<td>Password</td>
+				</tr>
+				<tr ng-repeat=" employe in employeCtrl.employes"> 
+					<td>{{employe.id}}</td>
+					<td>{{employe.nom}}</td>
+					<td>{{employe.prenom}}</td>
+					<td>{{employe.login}}</td>
+					<td>confidentiel</td>
+					<td><a href="">éditer client</a></td>
+					<td><a href="">supprimer client</a></td>
+					<td><a href="">Gérer les comptes</a></td>
+
+				</tr>
+
+
+
+
+			</table>
+			
+
+			</li>
+	</ul>
+</div>
+
