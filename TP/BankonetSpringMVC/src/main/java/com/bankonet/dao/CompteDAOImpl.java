@@ -27,7 +27,7 @@ public class CompteDAOImpl implements ICompteDAO {
 	@Transactional(readOnly=true)
 	public List<Compte> listComptes(Client c) {
 	
-		TypedQuery<Compte> selectQuery = em.createQuery("select cpte FROM Compte as cpte where cpte.owner = :x",Compte.class);
+		TypedQuery<Compte> selectQuery = em.createQuery("select cpte FROM Compte as cpte where cpte.owner.id = :x",Compte.class);
 		selectQuery.setParameter("x", c.getId());
 			
 		return (List<Compte>)selectQuery.getResultList();

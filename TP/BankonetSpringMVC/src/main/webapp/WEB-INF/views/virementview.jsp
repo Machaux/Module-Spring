@@ -23,51 +23,39 @@
 			<div><spring:message code="Name"/> : ${client.getNom()}</div>
 			<div><spring:message code="FirstName"/> : ${client.getPrenom()}</div>
 	
+	<!-- virement form -->
 	
-	<!-- Edition du compte -->
-	<br>
-	<br>
-	
-	<form:form method="post" action="/BankonetSpringMVC/${client.getId()}/saveCompteEpargne" modelAttribute="compteEpargne">
+	<form:form method="post" action="/BankonetSpringMVC/${client.getId()}/effectuerVirement/" modelAttribute="virement">
  
     	<table>
-     		<tr>
-				<td>Compte ID:<form:hidden path="identifiant" /></td>
-				<td>${compteCourant.getIdentifiant()}</td>
-			</tr>   
+     				    
 		    <tr>
-		        <td><form:label path="Libelle">libelle:</form:label></td>
-		        <td><form:input path="libelle" /></td>
-		        <!-- Show errors for libelle field -->
-		        <td><form:errors path="libelle"  /></td>
+		        <td><form:label path="compteSource">Compte Source:</form:label></td>
+		        <td><form:input path="compteSource" /></td>
+		        <!-- Show errors for compteSource field -->
+		        <td><form:errors path="compteSource"  /></td>
 		    </tr>
 		    <tr>
-		        <td>solde:<form:hidden path="Solde" /></td>
-		        <td>${compteCourant.getSolde()}</td>
+		        <td><form:label path="montant">Montant:</form:label></td>
+		        <td><form:input path="montant" /></td>
+		        <!-- Show errors for montant field -->
+		        <td><form:errors path="montant"  /></td>
 		    </tr>
-		   
-		   <tr>
-		        <td><form:label path="plafond">plafond:</form:label></td>
-		        <td><form:input path="plafond" /></td>
-		        <!-- Show errors for plafond field -->
-		        <td><form:errors path="plafond"  /></td>
+		    <tr>
+		        <td><form:label path="compteDestination">Compte Destinataire:</form:label></td>
+		        <td><form:input path="compteDestination" /></td>
+		        <!-- Show errors for compteDestination field -->
+		        <td><form:errors path="compteDestination"  /></td>
 		    </tr>
+		    
 		     <tr>
-		        <td><form:label path="tauxInteret">tauxInteret:</form:label></td>
-		        <td><form:input path="tauxInteret" /></td>
-		        <!-- Show errors for decouvertAutorise field -->
-		        <td><form:errors path="tauxInteret"  /></td>
-		    </tr>
-		    <tr>
 		        <td><form:button name="submit"><spring:message code="Save"></spring:message></form:button></td>
 		    </tr>
 	    </table>
     </form:form>
 	
 	
-	<br>
-		${info}
-	<br>
+	
 	<!-- Liste des comptes (courant & épargne) -->
 	
 	<table border="1">

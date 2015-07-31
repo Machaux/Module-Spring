@@ -107,7 +107,7 @@
 		<property name="jpaPropertyMap">
 			<props>
 				<prop key="eclipselink.weaving">static</prop>
-				<prop key="eclipselink.ddl-generation">create-tables</prop>
+				<prop key="eclipselink.ddl-generation">create-or-extend-tables</prop>
 			</props>
 		</property>
 	</bean>

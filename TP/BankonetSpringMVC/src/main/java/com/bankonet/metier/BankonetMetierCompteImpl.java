@@ -1,8 +1,13 @@
 package com.bankonet.metier;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +18,8 @@ import com.bankonet.model.Compte.types;
 import com.bankonet.model.CompteCourant;
 import com.bankonet.model.CompteEpargne;
 
+@Service("bankonetMetierCompte")
+@Scope("singleton")
 public class BankonetMetierCompteImpl implements IBankonetMetierCompte {
 
 	@Resource(name="compteDAO")
@@ -23,7 +30,8 @@ public class BankonetMetierCompteImpl implements IBankonetMetierCompte {
 	
 	@Autowired
 	private CompteEpargne compteEpargne;
-		
+	
+	
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED)
 	public Compte creerCompte(Client client, types type) {
@@ -67,5 +75,50 @@ public class BankonetMetierCompteImpl implements IBankonetMetierCompte {
 	public void updateCompte(Compte c) {
 		compteDAO.updateCompte(c);
 	}
+
+	@Override
+	public List<Compte> listTTComptes(Client c) {
+		return compteDAO.listComptes(c);
+	}
+
+	@Override
+	public List<Compte> listComptes(Client c, types type) {
+		
+		List<Compte> compteCourantList = new ArrayList<Compte>();
+		List<Compte> compteEpargneList = new ArrayList<Compte>();
+
+		for (Compte compte : compteDAO.listComptes(c))
+		{
+			if (compte instanceof CompteCourant)
+			{
+				compteCourantList.add(compte);
+			}
+			else if (compte instanceof CompteEpargne)
+			{
+				compteEpargneList.add(compte);
+			}
+		}
+		
+		if (type==types.compteCourant) 
+			{return  compteCourantList;}
+		else return compteEpargneList;	
+		
+	}
+	
+	@Override
+	public Compte chercherCompteClient(Client c, int compteID) {
+		Compte searchedCompte = null; 
+		
+		for (Compte compte : listTTComptes(c)) {
+			if (compte.getIdentifiant() == compteID)
+			{
+				searchedCompte = compte;
+			}
+		}
+		
+		return searchedCompte;
+	}
+
+	
 
 }

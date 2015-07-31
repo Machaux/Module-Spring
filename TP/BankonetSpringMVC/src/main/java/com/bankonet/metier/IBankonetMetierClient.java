@@ -3,7 +3,7 @@ package com.bankonet.metier;
 import java.util.List;
 
 import com.bankonet.model.Client;
-import com.bankonet.model.Compte.types;
+import com.bankonet.model.Virement;
 
 public interface IBankonetMetierClient {
 
@@ -21,10 +21,9 @@ public interface IBankonetMetierClient {
 	
 	public List<Client> supprimerCLientDontLeNomContient(String mot_cle);
 	
-	public void ajouterNouvCompteClient(Client c, types type);
-	
 	public void supprimerCompteClient(Client c, int compteID);
 	
+	public Virement newVirement();
 	
-
+	public void effectuerVirement(Integer cs, Integer cd, float montant);
 }

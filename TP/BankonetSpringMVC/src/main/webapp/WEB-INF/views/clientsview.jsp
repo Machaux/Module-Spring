@@ -29,7 +29,7 @@
  
     	<table>
     	
-    	
+<!--     	session -->
     		<tr>
 				<td>ID client:<form:hidden path="id" /></td>
 				<td>${client.getId()}</td>
@@ -93,6 +93,7 @@
 				<td>(confidentiel)</td>
 				<td><a href="/BankonetSpringMVC/deleteClient?id=${clients.get(i-1).getId()}">delete</a></td>
 				<td><a href="/BankonetSpringMVC/editClient/${clients.get(i-1).getId()}">edit</a></td>
+				<td><a href="/BankonetSpringMVC/${clients.get(i-1).getId()}/voirComptes/">Voir les Comptes</a></td>
 				<td></td>	
 			</tr>
 		</c:forEach>

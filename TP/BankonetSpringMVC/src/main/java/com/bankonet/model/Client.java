@@ -1,11 +1,12 @@
 package com.bankonet.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,9 +33,9 @@ public class Client extends Personne{
 	@Embedded
 	private Adresse adresse;
 	
-	@OneToMany
-	@JoinColumn(name="Comptes")
-	private List<Compte> listeComptes;
+	@OneToMany(mappedBy="owner", cascade=CascadeType.ALL)
+	//@PrivateOwned
+	private List<Compte> listeComptes = new ArrayList<Compte>();
 	
 	/**
 	 * Constructeurs
@@ -67,11 +68,12 @@ public class Client extends Personne{
 	}
 
 	public void addCompte(Compte c) {
+		c.setOwner(this);
 		this.getListeComptes().add(c);
 	}
 
-	public boolean suppCompte(Compte c) {
-		return this.getListeComptes().remove(c);
+	public void suppCompte(Compte c) {
+		this.getListeComptes().remove(c);
 	}
 
 	

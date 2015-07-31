@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @DiscriminatorValue("CE")
-@Component
+@Component("compteEpargne")
 public class CompteEpargne extends Compte {
     
 	@NotNull

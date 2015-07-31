@@ -11,15 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bankonet.dao.ICLientDAO;
 import com.bankonet.model.Client;
-import com.bankonet.model.Compte.types;
+import com.bankonet.model.Compte;
+import com.bankonet.model.Virement;
 
-@Service("bankonetMetier")
+@Service("bankonetMetierClient")
 @Scope("singleton")
-
 public class BankonetMetierClientImpl implements IBankonetMetierClient {
 
 	@Resource (name="clientDAO")
 	private ICLientDAO clientDao;
+	
+	@Resource (name="virement")
+	private Virement virement;
 	
 	@Resource
 	private IBankonetMetierCompte compteMetier;
@@ -30,14 +33,7 @@ public class BankonetMetierClientImpl implements IBankonetMetierClient {
 		clientDao.addClient(c);
 	}
 
-	@Override
-	@Transactional(propagation=Propagation.REQUIRED)
-	public void ajouterNouvCompteClient(Client c, types type) {
-		
-		c.addCompte(compteMetier.creerCompte(c, type));
-		clientDao.updateClient(c);
-	}
-
+	
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED)
 	public void supprimerCompteClient(Client c, int compteID) {
@@ -86,7 +82,26 @@ public class BankonetMetierClientImpl implements IBankonetMetierClient {
 		}
 		return clientDao.listClients();
 	}
-			
+	
+	@Override
+	public Virement newVirement() {
+		
+		return new Virement();
+	}
+	
+	@Override
+	public void effectuerVirement(Integer csid, Integer cdid, float montant) {
+		Compte cs = compteMetier.chercherCompte(csid);
+		Compte cd = compteMetier.chercherCompte(cdid);
+		
+		cs.setSolde(cs.getSolde()-montant);
+		cd.setSolde(cd.getSolde()+montant);
+		
+		compteMetier.updateCompte(cs);
+		compteMetier.updateCompte(cd);
+		
+	}
+
 	
 	/** getter & setter de clientDAO
 	 * 
@@ -99,5 +114,9 @@ public class BankonetMetierClientImpl implements IBankonetMetierClient {
 	public void setClientDao(ICLientDAO clientDao) {
 		this.clientDao = clientDao;
 	}
+
+
+	
+
 	
 }

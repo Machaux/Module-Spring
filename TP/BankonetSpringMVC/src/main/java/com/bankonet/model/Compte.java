@@ -6,9 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -21,13 +18,10 @@ public abstract class Compte {
 	private String libelle;
 	
 	@Id @GeneratedValue
-	private int identifiant;
+	private Integer identifiant;
 	
 	protected float solde;
 	
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name="clientId")
 	private Client owner;
 
 	public enum types {compteCourant, compteEpargne};
@@ -52,7 +46,7 @@ public abstract class Compte {
 		return libelle;
 	}
 
-	public int getIdentifiant() {
+	public Integer getIdentifiant() {
 		return identifiant;
 	}
 
@@ -66,7 +60,7 @@ public abstract class Compte {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	public void setIdentifiant(int identifiant) {
+	public void setIdentifiant(Integer identifiant) {
 		this.identifiant = identifiant;
 	}
 

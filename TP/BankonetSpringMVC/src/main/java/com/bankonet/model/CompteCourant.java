@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @DiscriminatorValue("CC")
-@Component
+@Component("compteCourant")
 public class CompteCourant extends Compte {
     
 	private float decouvertAutorise;

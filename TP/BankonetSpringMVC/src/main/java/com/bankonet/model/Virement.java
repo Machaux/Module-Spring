@@ -1,52 +1,50 @@
 package com.bankonet.model;
 
-/**
- * Modelise un virement d'un compte vers un autre.
- * 
- * @author Sysdeo
- */
-public class Virement {
-    private Compte compteDestination;
+import org.springframework.stereotype.Component;
 
-    private Compte compteSource;
+
+@Component("virement")
+public class Virement {
+    private Integer compteDestination;
+
+    private Integer compteSource;
 
     private float montant;
 
+    
     /**
-     * @param compteDestination
-     * @param compteSource
-     * @param montant
+     * Constructeur
      */
-    public Virement(Compte compteSource, Compte compteDestination, float montant) {
-        this.compteSource = compteSource;
-        this.compteDestination = compteDestination;
-        this.montant = montant;
-    }
+	public Virement() {
+		super();
+	}
 
-    /**
-     * Accesseur à la propriete <code>compteDestination</code>.
-     * 
-     * @return tp.banque.Comptes
-     */
-    public Compte getCompteDestination() {
-        return compteDestination;
-    }
+	/**
+	 * Getters & setters
+	 */
+	public Integer getCompteDestination() {
+		return compteDestination;
+	}
 
-    /**
-     * Accesseur de la propriete <code>compteSource</code>.
-     * 
-     * @return tp.banque.Comptes
-     */
-    public Compte getCompteSource() {
-        return compteSource;
-    }
+	public void setCompteDestination(Integer compteDestination) {
+		this.compteDestination = compteDestination;
+	}
 
-    /**
-     * Accesseur de la propriete <code>montant</code>.
-     * 
-     * @return float
-     */
-    public float getMontant() {
-        return montant;
-    }
+	public Integer getCompteSource() {
+		return compteSource;
+	}
+
+	public void setCompteSource(Integer compteSource) {
+		this.compteSource = compteSource;
+	}
+
+	public float getMontant() {
+		return montant;
+	}
+
+	public void setMontant(float montant) {
+		this.montant = montant;
+	}
+
+    
 }
